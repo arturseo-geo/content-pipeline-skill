@@ -1,0 +1,51 @@
+# content-pipeline-skill
+
+> **Also available as part of [claude-code-skills](https://github.com/arturseo-geo/claude-code-skills)** — a collection of 12 production-tested skills for Claude Code.
+
+> Built by **[Artur Ferreira](https://github.com/arturseo-geo)** @ **[The GEO Lab](https://thegeolab.net)**
+> [𝕏 @TheGEO_Lab](https://x.com/TheGEO_Lab) · [LinkedIn](https://linkedin.com/in/arturgeo) · [Reddit](https://www.reddit.com/user/Alternative_Teach_74/)
+
+![Licence](https://img.shields.io/badge/licence-MIT-green)
+![Claude Code](https://img.shields.io/badge/Claude_Code-skill-blueviolet)
+
+Multi-agent content production pipeline where specialist agents work together to research, write, edit, optimize for SEO/GEO, and validate against analytics data — with a master agent reviewing all outputs before human approval.
+
+## Install
+
+```bash
+git clone https://github.com/arturseo-geo/content-pipeline-skill.git ~/.claude/skills/content-pipeline
+```
+
+## File Structure
+
+- `SKILL.md` — Core skill instructions and pipeline orchestration logic
+- `agents/master-agent.md` — Master agent that coordinates the full pipeline and reviews all outputs
+- `agents/research-agent.md` — Research agent for topic exploration and data gathering
+- `agents/writer-agent.md` — Writer agent for draft creation
+- `agents/editor-agent.md` — Editor agent for quality, tone, and style review
+- `agents/seo-geo-agent.md` — SEO/GEO optimization agent
+- `agents/analytics-agent.md` — Analytics agent for data-driven validation
+- `commands/content-pipeline.md` — Slash command definition for triggering the pipeline
+- `references/agent-handoffs.md` — Reference for agent-to-agent handoff protocols
+
+## Related Repos
+
+- [claude-code-skills](https://github.com/arturseo-geo/claude-code-skills) — Full collection of 12 skills
+- [mcp-wordpress-setup](https://github.com/arturseo-geo/mcp-wordpress-setup) — WordPress MCP server setup
+
+## Acknowledgments
+
+Built following the open-source best practice approach — reading community work for inspiration, writing original content, and crediting every source.
+
+**Based on:**
+- [Agent Skills specification](https://github.com/anthropics/skills) by Anthropic (Apache 2.0)
+
+All skill content is original writing. No files were copied or adapted from any source.
+
+## Author
+
+Built and maintained by **[Artur Ferreira](https://github.com/arturseo-geo)** @ **[The GEO Lab](https://thegeolab.net)**
+
+## License
+
+[MIT](LICENSE)
