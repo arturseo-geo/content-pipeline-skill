@@ -110,6 +110,95 @@ Your responses:
 - **"redo research"** → restarts from Phase 1
 - **"fix SEO only"** → re-runs SEO agent on existing draft
 
+## Pipeline Configuration
+
+### Customising the pipeline
+
+Override defaults by adding options to your brief or command invocation:
+
+| Setting | Default | How to override |
+|---|---|---|
+| Content type | blog post | `--type guide`, `--type landing-page` |
+| Primary keyword | inferred from topic | `--keyword "exact phrase"` |
+| Target audience | inferred | `--audience "marketing managers"` |
+| Word count | analytics-driven | `--words 2000` |
+| Brand voice | conversational-authoritative | add `Voice:` section to brief.md |
+| Skip analytics | no | `--skip-analytics` (useful when APIs are unavailable) |
+
+### Custom agent instructions
+
+Append per-run overrides to any agent by adding a `## Custom Instructions` section
+to the brief. The orchestrator passes these to the relevant agent:
+
+```markdown
+## Custom Instructions
+Writer: Use a more technical tone — audience are developers.
+SEO: Target Spanish-language keywords as secondary.
+Editor: Keep British English spelling throughout.
+```
+
+## Quality Gates Between Stages
+
+Every transition between agents passes through a quality gate.
+If a gate fails, the pipeline halts with a clear error instead of producing
+garbage output downstream.
+
+See `references/quality-gates.md` for the full specification.
+
+| Gate | Between | Checks |
+|---|---|---|
+| Gate 1 | Research/Analytics → Writer | Both files exist, both show COMPLETE status, research has >= 3 sources |
+| Gate 2 | Writer → Editor | Draft exists, word count within 50% of target, meta section present |
+| Gate 3 | Editor → SEO | Edited draft exists, EDITING COMPLETE signal, no unresolved RESEARCH GAP markers |
+| Gate 4 | SEO → Master | Both final-draft.md and seo-report.md exist, SEO score >= 50/100 |
+| Gate 5 | Master → Human | master-review.md exists, contains GO or NEEDS REVISION decision |
+
+If a gate fails, the orchestrator reports which gate failed, why, and which
+agent to re-run. It does not silently skip stages.
+
+## Analytics Integration
+
+The Analytics Agent connects to real data sources to ground content decisions
+in actual performance data rather than guesswork.
+
+See `references/analytics-integration.md` for connection setup and fallback behaviour.
+
+**Supported data sources:**
+- Google Search Console (via FastAPI proxy or MCP)
+- GA4 / Google Analytics (via FastAPI proxy or MCP)
+- DataForSEO API (keyword research, SERP analysis)
+- Ahrefs CSV import (manual — no API on free tier)
+
+**When APIs are unavailable:**
+The Analytics Agent degrades gracefully. If an API call fails, it notes the failure
+in analytics.md and proceeds with available data. If ALL sources fail, it produces
+a minimal analytics.md with `ANALYTICS PARTIAL` status and the Writer Agent
+adjusts accordingly (relies more heavily on the Research Agent output).
+
+## Error Handling
+
+When an individual agent fails mid-execution:
+
+1. **Agent timeout** — if an agent produces no output within 5 minutes, the
+   orchestrator marks it as failed and reports the failure. The pipeline does not
+   proceed past a failed required agent.
+
+2. **Partial output** — if an agent writes a file but without the COMPLETE signal,
+   the orchestrator treats it as incomplete. It will retry the agent once with the
+   same inputs. If the second attempt also fails, the pipeline halts.
+
+3. **API failures inside agents** — agents handle their own API errors (e.g.,
+   Analytics Agent notes failed API calls). The quality gate after the agent
+   checks whether the output is still usable.
+
+4. **Revision loops** — if the Master Agent returns NEEDS REVISION more than
+   3 times for the same pipeline run, the orchestrator flags it as a stuck loop
+   and asks the human to intervene with specific guidance.
+
+5. **Recovery** — at any point, `/pipeline-status` shows exactly which stages
+   completed and which failed. You can re-run a single agent with
+   `/run-agent [name] "[instruction]"` to recover without restarting the full pipeline.
+
 ## Token Efficiency Notes
 
 Each agent runs in its own context window — they don't share memory.

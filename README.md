@@ -18,15 +18,33 @@ git clone https://github.com/arturseo-geo/content-pipeline-skill.git ~/.claude/s
 
 ## File Structure
 
-- `SKILL.md` — Core skill instructions and pipeline orchestration logic
-- `agents/master-agent.md` — Master agent that coordinates the full pipeline and reviews all outputs
-- `agents/research-agent.md` — Research agent for topic exploration and data gathering
-- `agents/writer-agent.md` — Writer agent for draft creation
-- `agents/editor-agent.md` — Editor agent for quality, tone, and style review
-- `agents/seo-geo-agent.md` — SEO/GEO optimization agent
-- `agents/analytics-agent.md` — Analytics agent for data-driven validation
-- `commands/content-pipeline.md` — Slash command definition for triggering the pipeline
-- `references/agent-handoffs.md` — Reference for agent-to-agent handoff protocols
+```
+content-pipeline-skill/
+├── SKILL.md                  — Core skill instructions and pipeline orchestration
+├── README.md                 — This file
+├── CONTRIBUTING.md           — Contribution guidelines
+├── SECURITY.md               — Security policy
+├── LICENSE                   — MIT licence
+├── .gitignore
+├── agents/
+│   ├── master-agent.md       — Final QA gate: reviews all outputs, GO/NEEDS REVISION
+│   ├── research-agent.md     — Web search, topic analysis, competitor content
+│   ├── writer-agent.md       — Draft creation from research + analytics briefs
+│   ├── editor-agent.md       — Quality, accuracy, brand voice, humanisation
+│   ├── seo-geo-agent.md      — Keyword optimisation, schema, GEO readiness
+│   └── analytics-agent.md    — GSC + GA4 + DataForSEO data pull
+├── commands/
+│   └── content-pipeline.md   — Slash command: /content-pipeline
+├── references/
+│   ├── agent-handoffs.md     — Agent-to-agent context passing and token budgets
+│   ├── quality-gates.md      — Quality checkpoints between pipeline stages
+│   └── analytics-integration.md — Data source setup and fallback behaviour
+└── .github/
+    ├── ISSUE_TEMPLATE/
+    │   ├── bug-report.md     — Bug report template
+    │   └── platform-update.md — Pipeline enhancement request template
+    └── pull_request_template.md — PR template
+```
 
 ## Related Repos
 
