@@ -17,7 +17,7 @@ file systems, and external services. Security matters.
 
 If you discover a security issue, **do not open a public issue**.
 
-Instead, email **arturseo.geo@gmail.com** with:
+Instead, email **artur@thegeolab.net** with:
 - Description of the vulnerability
 - Steps to reproduce
 - Potential impact
