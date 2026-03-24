@@ -1,6 +1,6 @@
 # content-pipeline-skill
 
-> Built by **[Artur Ferreira](https://github.com/arturseo-geo)** · Part of the **[The GEO Lab](https://thegeolab.net)** toolkit · [𝕏 @TheGEO_Lab](https://x.com/TheGEO_Lab) · [LinkedIn](https://linkedin.com/in/arturgeo) · [Reddit](https://www.reddit.com/user/Alternative_Teach_74/)
+> Built by **[Artur Ferreira](https://github.com/arturseo-geo)** @ **The GEO Lab** · [𝕏 @TheGEO\_Lab](https://x.com/TheGEO_Lab) · [LinkedIn](https://linkedin.com/in/arturgeo) · [Reddit](https://www.reddit.com/user/Alternative_Teach_74/)
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Licence](https://img.shields.io/badge/licence-MIT-green)
@@ -28,6 +28,7 @@ Most "content AI" tools generate text and call it done. This skill orchestrates 
 - ✅ **GEO optimisation** — not just SEO keywords, but AI extractability and citation readiness
 - ✅ **Human approval gate** — pipeline halts before publishing, outputs to `.claude/pipeline/`
 - ✅ **Slash command** — trigger with `/content-pipeline` inside Claude Code
+- ✅ **Production-tested** — part of the [**The GEO Lab**](https://thegeolab.net) toolkit for AI-assisted content operations
 
 ## Pipeline Flow
 
