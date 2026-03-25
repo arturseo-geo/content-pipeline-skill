@@ -22,6 +22,13 @@ This is what the human reads to make their approval decision.
 
 ## What You Do
 
+### 0. GEO Quality Gate (mandatory — run first)
+Before any other check, run the five-question GEO quality gate on every H2 section
+in `final-draft.md`. See `agents/geo-quality-gate.md` for the full checklist.
+Report per-section results in the master review. Any section failure triggers
+NEEDS REVISION — the Writer Agent must fix the failing sections before other
+checks proceed.
+
 ### 1. Brief compliance check
 Compare `final-draft.md` against `brief.md`:
 - Does the content match the requested topic, angle, and content type?
@@ -75,7 +82,7 @@ Pipeline run: [sequential ID]
 
 ## ⚡ Decision: [GO ✅ | NEEDS REVISION ❌]
 
-[One paragraph summary of why — what's strong, what (if anything) needs work]
+[One paragraph summary of why — what’s strong, what (if anything) needs work]
 
 ---
 
